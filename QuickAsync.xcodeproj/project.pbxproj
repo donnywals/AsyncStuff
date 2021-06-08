@@ -14,6 +14,7 @@
 		97EFAC99266FEE1D00FA67AB /* Authorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EFAC98266FEE1D00FA67AB /* Authorizer.swift */; };
 		97EFAC9B266FEE4C00FA67AB /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EFAC9A266FEE4C00FA67AB /* Networking.swift */; };
 		97EFAC9D266FEE6300FA67AB /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EFAC9C266FEE6300FA67AB /* RemoteDataSource.swift */; };
+		97EFACA1266FF9DD00FA67AB /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EFACA0266FF9DD00FA67AB /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		97EFAC98266FEE1D00FA67AB /* Authorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizer.swift; sourceTree = "<group>"; };
 		97EFAC9A266FEE4C00FA67AB /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		97EFAC9C266FEE6300FA67AB /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
+		97EFACA0266FF9DD00FA67AB /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				97EFAC98266FEE1D00FA67AB /* Authorizer.swift */,
 				97EFAC9A266FEE4C00FA67AB /* Networking.swift */,
 				97EFAC9C266FEE6300FA67AB /* RemoteDataSource.swift */,
+				97EFACA0266FF9DD00FA67AB /* ImageLoader.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			files = (
 				972B2BC3266ECCC900A4E693 /* ContentView.swift in Sources */,
 				97EFAC9D266FEE6300FA67AB /* RemoteDataSource.swift in Sources */,
+				97EFACA1266FF9DD00FA67AB /* ImageLoader.swift in Sources */,
 				97EFAC99266FEE1D00FA67AB /* Authorizer.swift in Sources */,
 				972B2BC1266ECCC900A4E693 /* QuickAsyncApp.swift in Sources */,
 				97EFAC9B266FEE4C00FA67AB /* Networking.swift in Sources */,

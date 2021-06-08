@@ -24,4 +24,8 @@ class Networking {
         let decoded = try JSONDecoder().decode(T.self, from: data)
         return decoded
     }
+    
+    func data(for url: URL) async throws -> Data {
+        return try await URLSession.shared.data(from: url).0
+    }
 }

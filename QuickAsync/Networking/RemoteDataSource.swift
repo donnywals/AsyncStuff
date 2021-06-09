@@ -19,7 +19,22 @@ class RemoteDataSource {
     
     func loadRandomNumber() async throws -> Int {
         let request = try await authorizer.authorize(URLRequest(url: endpoint))
-        let int: Int = try await network.load(request)
-        return int
+        //let int: Int = try await network.load(request)
+        return 10
+    }
+    
+    func loadManyInts() {
+        DispatchQueue.concurrentPerform(iterations: 10) { _ in
+            async {
+                do {
+                    let t = try await authorizer.accessToken()
+                    print(t)
+                    //let int = try await dataSource.loadRandomNumber()
+                    //num = int
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
 }

@@ -26,20 +26,30 @@ actor ImageLoader {
     }
     
     func load(_ url: URL) async throws -> UIImage? {
+        try Task.checkCancellation()
+        
         if let image = images[url] {
             print("cache hit")
             return image
-        } else if let image = await fromFileSystem(url) {
+        }
+        
+        try Task.checkCancellation()
+        
+        if let image = await fromFileSystem(url) {
             print("file cache hit")
             return image
         }
+        
+        try Task.checkCancellation()
         
         let data = try await network.data(for: url)
         
         if let image = UIImage(data: data) {
             images[url] = image
+            // will be Task.init later
             async {
                 do {
+                    try Task.checkCancellation()
                     try data.write(to: fileURL(for: url))
                     print("done writing to disk")
                 } catch {
@@ -48,11 +58,12 @@ actor ImageLoader {
             }
         }
         
-        print("cache miss")
+        
         return images[url]
     }
     
     private func fromFileSystem(_ url: URL) async -> UIImage? {
+        // Task.init
         let handler = async { () -> UIImage? in
             if let data = try? Data(contentsOf: fileURL(for: url)) {
                 return UIImage(data: data)
@@ -64,11 +75,7 @@ actor ImageLoader {
         return await handler.get()
     }
     
-    func load(_ urls: [URL]) -> AsyncImageSequence {
-        return AsyncImageSequence(urls, network: network)
-    }
-    
-    func loadInGroup(_ urls: [URL]) async throws-> [UIImage] {
+    func loadInGroup(_ urls: [URL]) async throws -> [UIImage] {
         var images = [UIImage]()
         
         try await withThrowingTaskGroup(of: UIImage.self) { group in
@@ -87,6 +94,12 @@ actor ImageLoader {
         }
         
         return images
+    }
+}
+
+extension ImageLoader {
+    func load(_ urls: [URL]) -> AsyncImageSequence {
+        return AsyncImageSequence(urls, network: network)
     }
 }
 

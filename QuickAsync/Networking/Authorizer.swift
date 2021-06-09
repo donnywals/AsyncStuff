@@ -16,7 +16,7 @@ struct Token {
     }
 }
 
-actor Authorizer {
+class Authorizer {
     private var currentToken: Token?
     private var refreshTask: Task.Handle<Token, Error>?
     private let endpoint = URL(string: "https://www.uuidgenerator.net/api/version4")!
@@ -45,15 +45,17 @@ actor Authorizer {
     }
     
     func refreshToken(_ token: Token?) async throws -> Token {
-        let tokenId: UUID = UUID(uuidString: try await networking.load(endpoint))!
+        print("making request to refresh token")
+        //let tokenId: UUID = UUID(uuidString: try await networking.load(endpoint))!
         // tokens are valid for 10 seconds
         let tokenExpiresAt = Date().addingTimeInterval(10)
-        return Token(validUntil: tokenExpiresAt, id: tokenId)
+        return Token(validUntil: tokenExpiresAt, id: UUID())
     }
     
     func authorize(_ request: URLRequest) async throws -> URLRequest {
         var mutRequest = request
         let token = try await accessToken()
+        // print("making request with \(token)")
         mutRequest.addValue("Bearer \(token.id)", forHTTPHeaderField: "Authorization")
         return mutRequest
     }
